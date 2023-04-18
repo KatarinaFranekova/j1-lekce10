@@ -34,6 +34,10 @@ public class Uloziste {
         // Načíst objekt UlozenyStav pomocí objectMapper.readValue(file, UlozenyStav.class)
         // Získat z UlozenyStav souřadnice kočky a myši
         // Zapsat tyto souřadnice do objektů kočky a myši pomocí setLocation()
+
+        UlozenyStav ulozenyStav = objectMapper.readValue(path.toFile(),UlozenyStav.class);
+        cat.setLocation(ulozenyStav.getCat());
+        mouse.setLocation(ulozenyStav.getMouse());
     }
 
     public void nacistStavZeSouboru() throws IOException {
@@ -45,6 +49,13 @@ public class Uloziste {
         // Vytvořit objekt UlozenyStav
         // Uložit do něj souřadnice kočky a myši – souřadnice získáte voláním getLocation()
         // Uložit objekt UlozenyStav do souboru pomocí objectMapper.writeValue(file, object)
+
+        UlozenyStav ulozenyStav = new UlozenyStav();
+        ulozenyStav.setCat(cat.getLocation());
+        ulozenyStav.setMouse(mouse.getLocation());
+        objectMapper.writeValue(path.toFile(), ulozenyStav);
+
+
     }
 
     public void ulozitStavDoSouboru() throws IOException {
